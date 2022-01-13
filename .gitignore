@@ -1,4 +1,4 @@
-/target
+resources/target
 *.js
 !jest.config.js
 *.d.ts

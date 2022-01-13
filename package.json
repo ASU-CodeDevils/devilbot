@@ -5,22 +5,38 @@
     "devil-bot-rust-cdk": "bin/devil-bot-rust-cdk.js"
   },
   "scripts": {
+    "prettier": "prettier --write './@(lib)/**/*@(.ts|.tsx)'",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "deploy": "./build-function.sh && cdk deploy",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "aws-cdk": "2.7.0",
+    "@aws-cdk/assert": "1.139.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
-    "typescript": "~3.9.7"
+    "typescript": "~3.9.7",
+    "prettier": "2.5.1"
   },
   "dependencies": {
+    "@aws-cdk/aws-lambda": "1.139.0",
+    "@aws-cdk/core": "1.139.0",
     "aws-cdk-lib": "2.7.0",
-    "constructs": "^10.0.0"
+    "constructs": "^10.0.0",
+    "husky": "7.0.4",
+    "source-map-support": "0.5.21"
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": "prettier --write"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

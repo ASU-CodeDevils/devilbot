@@ -13,6 +13,10 @@
     "deploy": "./build-function.sh && cdk deploy",
     "prepare": "husky install"
   },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
     "aws-cdk": "2.7.0",
     "@aws-cdk/assert": "1.139.0",

@@ -46,7 +46,7 @@
 ## Set up project for AL2 target MacOS (Intel)
 1. `rustup target add x86_64-unknown-linux-musl`
 1. `mkdir .cargo`
-1. 
+1. Create a local Cargo config file (don't commit this):
     ```
     echo '[target.x86_64-unknown-linux-musl]
     linker = "x86_64-linux-musl-gcc"' > .cargo/config
@@ -61,7 +61,7 @@
 ## Set up project for AL2 target MacOS (Apple Silicon)
 1. `rustup target add x86_64-unknown-linux-musl`
 1. `mkdir .cargo`
-1.
+1. Create a local Cargo config file (don't commit this):
     ```
     echo '[target.x86_64-unknown-linux-musl]
     linker = "x86_64-linux-gnu-gcc"' > .cargo/config

@@ -38,12 +38,12 @@
 1. For "default region name" use: `us-east-1`
 1. For "defaut output format" use: `None` (just leave blank and press enter)
 
-## Set up Rust for AL2 target Ubuntu
+## Set up project for AL2 target Ubuntu
 1. TBD
 1. `sh build-function.sh`
 1. TBD
 
-## Set up Rust for AL2 target MacOS (Intel)
+## Set up project for AL2 target MacOS (Intel)
 1. `rustup target add x86_64-unknown-linux-musl`
 1. `mkdir .cargo`
 1. 

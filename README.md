@@ -38,82 +38,16 @@
 1. For "default region name" use: `us-east-1`
 1. For "defaut output format" use: `None` (just leave blank and press enter)
 
-## Set up project for AL2 target Ubuntu(x86_64)
-1. Install Deps - `sudo apt install build-essential musl-dev musl-tools`
-1. Install Rust - `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-1. Install NVM -`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-1. Install AWS-CLI - `curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"`
-1. `unzip awscliv2.zip`
-1. `sudo ./aws/install`
-1. Install NPM - `nvm install --lts`
-1. `sh build-function.sh`
-1. `rustup target add x86_64-unknown-linux-musl`
-1. Create a local Cargo config file (don't commit this):
-    ```
-    echo '[target.x86_64-unknown-linux-musl]
-    linker = "musl-gcc"' > .cargo/config
-    ```
-1. `chmod +x build-functions.sh`
-1. `sh build-function.sh`
-1. `npm install`
-1. `npm run build`
-1. `cdk bootstrap`
-1. `cdk deploy`
 
-## Set up project for AL2 target Ubuntu
-1. Install Deps - `sudo apt install build-essential musl-dev musl-tools`
-1. Install Rust - `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-1. Install NVM -`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-1. Install AWS-CLI - `curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"`
-1. `unzip awscliv2.zip`
-1. `sudo ./aws/install`
-1. Install NPM - `nvm install --lts`
-1. `rustup target add aarch64-unknown-linux-musl`
-1. Create a local Cargo config file (don't commit this):
-    ```
-    echo '[target.aarch64-unknown-linux-musl]
-    linker = "musl-gcc"' > .cargo/config
-    ```
-1. `chmod +x arm-build-functions.sh`
-1. `sh arm-build-function.sh`
-1. `npm install`
-1. `npm run build`
-1. `cdk bootstrap`
-1. `cdk deploy`
-
-## Set up project for AL2 target MacOS (Intel)
-1. `rustup target add x86_64-unknown-linux-musl`
-1. `mkdir .cargo`
-1. Create a local Cargo config file (don't commit this):
-    ```
-    echo '[target.x86_64-unknown-linux-musl]
-    linker = "x86_64-linux-musl-gcc"' > .cargo/config
-    ```
-1. `brew install filosottile/musl-cross/musl-cross`
-1. `ln -s /usr/local/bin/x86_64-linux-musl-gcc /usr/local/bin/musl-gcc`
+## Set up project for AL2 target Mac and Linux
+1. Ensure you've installed Rust, NPM, AWS-CDK Toolkit, and AWS-CLI.
+1. Confirm you've setup your AWS account and Connected it!
+1. `chmod +x build-function.sh`
 1. `sh build-function.sh`
-1. `npm install`
-1. `npm run build`
-1. `cdk bootstrap`
-1. `cdk deploy`
-
-## Set up project for AL2 target MacOS (Apple Silicon)
-1. `rustup target add x86_64-unknown-linux-musl`
-1. `mkdir .cargo`
-1. Create a local Cargo config file (don't commit this):
-    ```
-    echo '[target.x86_64-unknown-linux-musl]
-    linker = "x86_64-linux-gnu-gcc"' > .cargo/config
-    ```
-1. `sudo apt install gcc-x86-64-linux-gnu`
-1. `sh build-function.sh`
-1. `npm install`
-1. `npm run build`
 1. `cdk bootstrap`
 1. `cdk deploy`
 
 ## After your project is set up use the following to build your code and deploy it to AWS test.
-1. `npm run build`
 1. `sh build-function.sh`
 1. `cdk diff` (optional, but useful command)
 1. `cdk deploy`

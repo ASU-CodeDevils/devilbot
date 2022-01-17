@@ -4,7 +4,12 @@ resources/target
 *.d.ts
 node_modules
 .DS_Store
+resources/.DS_Store
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+# Cargo config
+.cargo
+resources/.cargo

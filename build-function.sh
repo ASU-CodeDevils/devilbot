@@ -17,24 +17,32 @@ case $kernel in
 
     Darwin)
         if [ "${arch}" = "x86_64" ]; then
-            if [ "$(sysctl -in sysctl.proc_translated)" = "1" ]; then
+            if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
+                linker="x86_64-unknown-linux-gnu-gcc"
                 echo "OS = Mac M1 using Rosetta\nArch = ${arch}\nLinker = ${linker}"
-                sudo apt install gcc-x86-64-linux-gnu -y
+                echo "Mac M1 using Rosetta curretnly WiP... Exiting"
+                exit 1
+                # export CC_x86_64_unknown_linux_musl=x86_64-unknown-linux-gnu-gcc
+                # brew tap messense/macos-cross-toolchains
+                # brew install x86_64-unknown-linux-gnu
             else
                 linker="x86_64-linux-musl-gcc"
                 echo "OS = Mac Intel\nArch = ${arch}\nLinker = ${linker}"
                 ln -s /usr/local/bin/${linker} /usr/local/bin/musl-gcc
             fi
         elif [ "${arch}" = "arm64" ]; then
+            linker="x86_64-unknown-linux-gnu-gcc"
             echo "OS = Mac M1\nArch = ${arch}\nLinker = ${linker}"
-            sudo apt install gcc-x86-64-linux-gnu -y
+            brew tap messense/macos-cross-toolchains
+            brew install x86_64-unknown-linux-gnu
+            export CC_x86_64_unknown_linux_musl=x86_64-unknown-linux-gnu-gcc
         fi        
         ;;
 
     *)
         echo "Unknown System: ${kernel} ${arch}"
         echo "Exiting..."
-        exit 0
+        exit 1
         ;;
 esac
 

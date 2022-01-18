@@ -39,8 +39,10 @@
 1. For "defaut output format" use: `None` (just leave blank and press enter)
 
 
-## Set up project for AL2 target Mac and Linux
-1. Ensure you've installed Rust, NPM, AWS-CDK Toolkit, and AWS-CLI.
+## Set up project for AL2 target Mac, Ubuntu (aarch64/x86_64), and Windows (WSL 2 Ubuntu 20.04 LTS)
+1. If on Windows install and configure Ubuntu 20.04 LTS using WSL2 the following step are to be done wihtin that VM
+https://docs.microsoft.com/en-us/windows/wsl/install
+1. Ensure you've installed Rust, NPM, AWS-CDK Toolkit, and AWS-CLI
 1. Confirm you've setup your AWS account and Connected it!
 1. `chmod +x build-function.sh`
 1. `sh build-function.sh`

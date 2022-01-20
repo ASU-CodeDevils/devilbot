@@ -1,4 +1,6 @@
 # Devil Bot Rust
+![devil_bot_rust](https://github.com/ASU-CodeDevils/devil_bot_rust/actions/workflows/check-and-lint.yaml/badge.svg) ![devil_bot_rust](https://github.com/ASU-CodeDevils/devil_bot_rust/actions/workflows/build-and-test.yaml/badge.svg) [![codecov](https://codecov.io/gh/ASU-CodeDevils/devil_bot_rust/branch/main/graph/badge.svg?token=6NS5GOSXZ2)](https://codecov.io/gh/ASU-CodeDevils/devil_bot_rust) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ## Overview
 * A Rust implementation of a Slack bot that will be used by the CodeDevils Slack workspace.
 * All resources are managed using AWS CDK.

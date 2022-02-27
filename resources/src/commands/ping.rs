@@ -20,13 +20,3 @@ pub async fn run(channel: &str) {
         Err(x) => log::info!("ERR: {}", x),
     }
 }
-
-// fn slack_webhook_url() -> String {
-//     match env::var("DEVIL_BOT_TEST_CHANNEL_URL") {
-//         Ok(val) => val,
-//         Err(_) => {
-//             println!("Required the DEVIL_BOT_TEST_CHANNEL_URL environment variable");
-//             process::exit(1);
-//         }
-//     }
-// }

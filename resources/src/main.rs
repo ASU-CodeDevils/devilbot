@@ -2,11 +2,11 @@ use lambda_http::{service_fn, Error, IntoResponse, Request};
 use log::LevelFilter;
 use serde_json::{json, Value};
 use simple_logger::SimpleLogger;
+use std::{env, process};
 
 mod commands;
 
-const DEVIL_BOT_TEST_CHANNEL_URL: &str =
-    "https://hooks.slack.com/services/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";
+const DEVIL_BOT_TEST_CHANNEL_URL: &str = "DEVIL_BOT_TEST_CHANNEL_URL";
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -73,5 +73,18 @@ async fn intercept_command(body: &Value) {
         // Add new commands below and create new async functions for them.
         "ping" => commands::ping::run(channel).await,
         _ => log::info!("Invalid command: {}", text),
+    }
+}
+
+// Helper function for getting Lambda environment variables. If
+// you want to add new env vars, you can add them to the
+// environment list in the devil-bot-rust-cdk-stack.ts file.
+pub fn get_env_var(env_var: &str) -> String {
+    match env::var(env_var) {
+        Ok(val) => val,
+        Err(_) => {
+            log::info!("Required the {} environment variable", env_var);
+            process::exit(1);
+        }
     }
 }

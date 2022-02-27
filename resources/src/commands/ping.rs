@@ -5,7 +5,8 @@ use slack_hook::{PayloadBuilder, Slack};
 // This can be used as an example command when creating new commands for
 // the Slack bot.
 pub async fn run(channel: &str) {
-    let slack = Slack::new(crate::DEVIL_BOT_TEST_CHANNEL_URL).unwrap();
+    let slack_webhook_url: String = crate::get_env_var(crate::DEVIL_BOT_TEST_CHANNEL_URL);
+    let slack = Slack::new(&*slack_webhook_url).unwrap();
     let p = PayloadBuilder::new()
         .text("pong")
         .channel(channel)

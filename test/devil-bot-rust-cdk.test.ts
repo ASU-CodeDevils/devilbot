@@ -53,7 +53,7 @@ test('Lambda function and corresponding IAM role is created', () => {
       Role: {},
       Architectures: ['arm64'],
       Description:
-        'Deploying a Rust function on Lambda using the custom runtime',
+        'Deploying a Rust function on Lambda using the custom runtime to back our Slack bot endpoint.',
       Environment: {
         Variables: {
           RUST_BACKTRACE: '1',

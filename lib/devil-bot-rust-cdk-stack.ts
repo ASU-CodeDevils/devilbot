@@ -17,15 +17,17 @@ export class DevilBotRustCdkStack extends cdk.Stack {
       runtime: lambda.Runtime.PROVIDED_AL2,
       architecture: lambda.Architecture.X86_64,
       handler: "not.required",
-      environment: {
+      environment: { // Fill in your personal app's webhook URLs below when testing (remove them when creating a PR)
         RUST_BACKTRACE: "1",
-        SLACK_API_TOKEN: ""
+        SLACK_API_TOKEN: "",
+        DEVIL_BOT_TEST_CHANNEL_URL: "",
+        DEVIL_BOT_DEV_CHANNEL_URL: ""
       },
-      logRetention: RetentionDays.ONE_WEEK,
+      logRetention: RetentionDays.ONE_DAY, // There will be a lot of event logs, this will make sure to cut down on costs
     });
 
     // defines an API Gateway REST API resource backed by the "rust-slack-lambda" function.
-    new apigw.LambdaRestApi(this, 'Endpoint', {
+    new apigw.LambdaRestApi(this, 'RustSlackEndpoint', {
       handler: rustSlackLambda
     });
   }

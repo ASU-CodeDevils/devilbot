@@ -9,6 +9,7 @@ case $kernel in
     Linux)
         echo "OS: Linux\nArch: ${arch}\nLinker: ${linker}"
         sudo apt install build-essential -y
+        sudo apt install musl-tools -y
         if [ "${arch}" = "aarch64" ]; then
             export CC_x86_64_unknown_linux_musl=${linker}
             sudo apt install gcc-x86-64-linux-gnu -y

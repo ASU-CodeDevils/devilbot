@@ -13,3 +13,6 @@ cdk.out
 # Cargo config
 .cargo
 resources/.cargo
+
+# VS Code
+.code-workspace

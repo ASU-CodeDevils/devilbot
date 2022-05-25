@@ -12,6 +12,7 @@ case $kernel in
         if [ "${arch}" = "aarch64" ]; then
             export CC_x86_64_unknown_linux_musl=${linker}
             sudo apt install gcc-x86-64-linux-gnu -y
+            sudo apt install musl-tools -y
         fi
         ;;
 

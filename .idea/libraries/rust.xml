@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rust">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/resources/rust.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

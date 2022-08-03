@@ -3,3 +3,4 @@
 // This will allow you to import them into main.rs.
 // Read more here: https://doc.rust-lang.org/rust-by-example/mod.html
 pub mod ping;
+pub mod buns;

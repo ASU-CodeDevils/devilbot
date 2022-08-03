@@ -22,6 +22,7 @@
 * Install NodeJS v16 (latest LTS version): https://nodejs.org/en/download/
 * Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 * Install AWS CDK Toolkit: `npm install -g aws-cdk`
+* You may get a warning that -g is deprecated and to use --location=global instead
 
 ## Getting Started with Git
 1. Create a new local directory for this project.
@@ -70,6 +71,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install
 1. Do the following after creating the above infrastructure (after successfully running `cdk deploy` to your personal AWS account).
 1. Go to the API Gateway console (type "API Gateway" in search bar on AWS website after logging in).
 1. Click on "APIs" on the left-hand side bar under "API Gateway".
+1. Check to make sure you are signed in under us-east-1
 1. Click on "RustSlackEndpoint".
 1. Click on "Stages" on the left-hand side bar under "API: RustSlackEndpoint".
 1. Click on "Prod" under "Stages".

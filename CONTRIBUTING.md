@@ -8,6 +8,7 @@ This document plans to outline the following for *all* contributers of the Rust 
 1. [Workflow Examples](#workflow-examples)
 1. [Quality of Code Requirements](#quality-of-code)
 1. [Git Cheatsheet](#git-cheatsheet)
+1. [Rust Commands](#rust-commands)
 1. [Other Resources](#other-resources)
 
 ---
@@ -91,7 +92,16 @@ Use Case: Your development branch (current branch) is behind `dev` and you want 
 
 ---
 
+# Rust Commands
+```
+cargo fmt --all --check --manifest-path resources/Cargo.toml
+```
+Use Case: We want to make sure you code is formatted correctly to Rustacean standards. This command will run during your pull request, but you can run it each time before you commit code as well. We encourage it!
+---
+
 ## Other Resources
 * Installing Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 * Git Basics: https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
 * GitHub - Creating a Pull Request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+
+

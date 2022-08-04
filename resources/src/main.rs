@@ -65,9 +65,17 @@ async fn intercept_command(body: &Value) {
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");
+    if channel != "C0351GJ62Q0" {
+        log::info!("This channel is not an allowed channel");
+        return;
+    }
     log::info!("text: {}, channel: {}", text, channel);
 
     let lowercase_text: &str = &*text.to_lowercase();
+
+    if lowercase_text.contains("buns") {
+        commands::buns::run(channel).await;
+    }
 
     match lowercase_text {
         // Add new commands below and create new async functions for them.

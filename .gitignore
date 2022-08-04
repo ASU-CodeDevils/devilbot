@@ -16,3 +16,6 @@ resources/.cargo
 
 # VS Code
 .code-workspace
+
+# IntelliJ
+.idea

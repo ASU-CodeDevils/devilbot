@@ -66,7 +66,7 @@ async fn intercept_command(body: &Value) {
         .as_str()
         .unwrap_or("invalid_channel");
     if channel != "C0351GJ62Q0" {
-        log::info!("This channel is not the test channel");
+        log::info!("This channel is not an allowed channel");
         return;
     }
     log::info!("text: {}, channel: {}", text, channel);

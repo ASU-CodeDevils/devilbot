@@ -11,6 +11,7 @@
 1. [After your project is set up use the following to build your code and deploy it to AWS test](#after-your-project-is-set-up-use-the-following-to-build-your-code-and-deploy-it-to-aws-test)
 1. [Setting up to test against a personal Slack bot](#setting-up-to-test-against-a-personal-slack-bot)
 1. [Useful CDK commands and their descriptions](#useful-cdk-commands-and-their-descriptions)
+1. [How to Enable API Throttling](#how-to-enable-api-throttling)
 
 ## Overview
 * A Rust implementation of a Slack bot that will be used by the CodeDevils Slack workspace.
@@ -164,3 +165,11 @@ Postman is a UI alternative to using [`curl`](https://everything.curl.dev).
     "type": "url_verification"
 }
 ```
+
+### How to Enable API Throttling
+1. Sign into AWS
+1. In the search bar, search for API Gateway
+1. Click on RustSlackEndpint
+1. In the left menu, click on Usage Plans
+1. In the Usage Plans menu, create a new usage plan
+** This is pretty customizable. Recommended to cap your requests per month at 900,000

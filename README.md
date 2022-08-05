@@ -172,3 +172,4 @@ Postman is a UI alternative to using [`curl`](https://everything.curl.dev).
 1. Click on RustSlackEndpint
 1. In the left menu, click on Usage Plans
 1. In the Usage Plans menu, create a new usage plan
+** This is pretty customizable. Recommended to cap your requests per month at 900,000

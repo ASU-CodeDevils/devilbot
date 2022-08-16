@@ -4,8 +4,10 @@ use serde_json::{json, Value};
 use simple_logger::SimpleLogger;
 use std::{env, process};
 
+mod aws;
 mod commands;
 
+const BUNS_TABLE_NAME: &str = "BUNS_TABLE_NAME";
 const DEVIL_BOT_TEST_CHANNEL_URL: &str = "DEVIL_BOT_TEST_CHANNEL_URL";
 
 #[tokio::main]
@@ -69,12 +71,23 @@ async fn intercept_command(body: &Value) {
         log::info!("This channel is not an allowed channel");
         return;
     }
-    log::info!("text: {}, channel: {}", text, channel);
+    let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
+
+    log::info!(
+        "text: {}, channel: {}, user_id: {}",
+        text,
+        channel,
+        enterprise_user_id
+    );
 
     let lowercase_text: &str = &*text.to_lowercase();
 
     if lowercase_text.contains("buns") {
         commands::buns::run(channel).await;
+        let buns_table_name: String = get_env_var(BUNS_TABLE_NAME);
+        aws::dynamo::increment_item(&*buns_table_name, "user_id", enterprise_user_id, "buns")
+            .await
+            .unwrap_or_else(|err| log::info!("DynamoDB increment buns error: {}", err));
     }
 
     match lowercase_text {

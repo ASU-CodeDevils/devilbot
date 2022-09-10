@@ -67,10 +67,13 @@ async fn intercept_command(body: &Value) {
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");
-    if channel != "C0351GJ62Q0" {
-        log::info!("This channel is not an allowed channel");
-        return;
-    }
+    let emoji: &str = body["event"]["blocks"][0]["elements"][0]["elements"][0]["name"]
+        .as_str()
+        .unwrap_or("invalid_emoji_name");
+    // if channel != "C0351GJ62Q0" {
+    //     log::info!("This channel is not an allowed channel");
+    //     return;
+    // }
     let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
 
     log::info!(
@@ -79,6 +82,7 @@ async fn intercept_command(body: &Value) {
         channel,
         enterprise_user_id
     );
+    log::info!("Body {}", body);
 
     let lowercase_text: &str = &*text.to_lowercase();
 
@@ -94,6 +98,11 @@ async fn intercept_command(body: &Value) {
         // Add new commands below and create new async functions for them.
         "ping" => commands::ping::run(channel).await,
         _ => log::info!("Invalid command: {}", text),
+    }
+
+    match emoji {
+        "buns" => commands::buns::run(channel).await,
+        _ => log::info!("Invalid Emoji: {}", emoji),
     }
 }
 

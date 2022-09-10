@@ -64,37 +64,43 @@ async fn intercept_command(body: &Value) {
     let text: &str = body["event"]["blocks"][0]["elements"][0]["elements"][0]["text"]
         .as_str()
         .unwrap_or("invalid_text");
-    let channel: &str = body["event"]["channel"]
-        .as_str()
-        .unwrap_or("invalid_channel");
-    if channel != "C0351GJ62Q0" {
-        log::info!("This channel is not an allowed channel");
-        return;
-    }
+    // let channel: &str = body["event"]["channel"]
+    //     .as_str()
+    //     .unwrap_or("invalid_channel");
+    // if channel != "C0351GJ62Q0" {
+    //     log::info!("This channel is not an allowed channel");
+    //
+    // }
     let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
+    let event_type: &str = body["event"]["type"].as_str().unwrap_or("invalid_event");
 
     log::info!(
-        "text: {}, channel: {}, user_id: {}",
+        "text: {}, user_id: {}, event_type: {}",
         text,
-        channel,
-        enterprise_user_id
+        enterprise_user_id,
+        event_type,
     );
 
     let lowercase_text: &str = &*text.to_lowercase();
 
+    match event_type {
+        "team_join" => commands::onboard_user::run(body).await,
+        _ => log::info!("Not an event {}", event_type),
+    }
+
     if lowercase_text.contains("buns") {
-        commands::buns::run(channel).await;
+        //commands::buns::run(channel).await;
         let buns_table_name: String = get_env_var(BUNS_TABLE_NAME);
         aws::dynamo::increment_item(&*buns_table_name, "user_id", enterprise_user_id, "buns")
             .await
             .unwrap_or_else(|err| log::info!("DynamoDB increment buns error: {}", err));
     }
 
-    match lowercase_text {
-        // Add new commands below and create new async functions for them.
-        "ping" => commands::ping::run(channel).await,
-        _ => log::info!("Invalid command: {}", text),
-    }
+    // match lowercase_text {
+    //     // Add new commands below and create new async functions for them.
+    //     "ping" => commands::ping::run(channel).await,
+    //     _ => log::info!("Invalid command: {}", text),
+    // }
 }
 
 // Helper function for getting Lambda environment variables. If

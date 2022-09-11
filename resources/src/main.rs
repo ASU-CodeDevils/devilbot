@@ -61,48 +61,42 @@ async fn intercept_challenge_request(body: &Value) -> String {
 // This function parses the event body received in the request
 // and pulls out the Slack message text if there is any.
 async fn intercept_command(body: &Value) {
-    let text: &str = body["event"]["blocks"][0]["elements"][0]["elements"][0]["text"]
-        .as_str()
-        .unwrap_or("invalid_text");
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");
-    let emoji: &str = body["event"]["blocks"][0]["elements"][0]["elements"][0]["name"]
+    let text: String = body["event"]["text"]
         .as_str()
-        .unwrap_or("invalid_emoji_name");
-    // if channel != "C0351GJ62Q0" {
-    //     log::info!("This channel is not an allowed channel");
-    //     return;
-    // }
+        .unwrap_or("invalid_text")
+        .to_lowercase();
     let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
+    let is_bot: bool = body["event"]["subtype"] == "bot_message";
 
     log::info!(
-        "text: {}, channel: {}, user_id: {}",
+        "text: {}, channel: {}, user_id: {}, is_bot {}",
         text,
         channel,
-        enterprise_user_id
+        enterprise_user_id,
+        is_bot
     );
     log::info!("Body {}", body);
 
-    let lowercase_text: &str = &*text.to_lowercase();
-
-    if lowercase_text.contains("buns") {
-        commands::buns::run(channel).await;
-        let buns_table_name: String = get_env_var(BUNS_TABLE_NAME);
-        aws::dynamo::increment_item(&*buns_table_name, "user_id", enterprise_user_id, "buns")
-            .await
-            .unwrap_or_else(|err| log::info!("DynamoDB increment buns error: {}", err));
+    // Prevent responding to any channel other than Test
+    if channel != "C0351GJ62Q0" {
+        log::info!("This channel is not an allowed channel");
+        return;
     }
-
-    match lowercase_text {
+    // Prevent responding to bots
+    if is_bot {
+        log::info!("This is a bot");
+        return;
+    }
+    match text.as_str() {
         // Add new commands below and create new async functions for them.
         "ping" => commands::ping::run(channel).await,
-        _ => log::info!("Invalid command: {}", text),
+        _ => log::info!("Invalid command: {:?}", ..),
     }
-
-    match emoji {
-        "buns" => commands::buns::run(channel).await,
-        _ => log::info!("Invalid Emoji: {}", emoji),
+    if text.contains("buns") {
+        commands::buns::run(channel, enterprise_user_id).await;
     }
 }
 
@@ -117,4 +111,11 @@ pub fn get_env_var(env_var: &str) -> String {
             process::exit(1);
         }
     }
+}
+
+pub async fn increment_buns(enterprise_user_id: &str) {
+    let buns_table_name: String = get_env_var(BUNS_TABLE_NAME);
+    aws::dynamo::increment_item(&*buns_table_name, "user_id", enterprise_user_id, "buns")
+        .await
+        .unwrap_or_else(|err| log::info!("DynamoDB increment buns error: {}", err));
 }

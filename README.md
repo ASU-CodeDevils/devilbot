@@ -167,9 +167,13 @@ Postman is a UI alternative to using [`curl`](https://everything.curl.dev).
 ```
 
 ### How to Enable API Throttling
-1. Sign into AWS
-1. In the search bar, search for API Gateway
-1. Click on RustSlackEndpint
-1. In the left menu, click on Usage Plans
-1. In the Usage Plans menu, create a new usage plan
-** This is pretty customizable. Recommended to cap your requests per month at 900,000
+1. Sign in to AWS
+2. In the search bar, search for API Gateway
+3. Click on RustSlackEndpoint
+4. In the left menu, click on Usage Plans
+5. In the Usage Plans menu, create a new usage plan
+* This is pretty customizable. Recommended to cap your requests per month at 900,000
+
+### Useful Slack Documentation
+* [Events API (What comes to our bot from Slack)] (https://api.slack.com/events)
+* [Web API Methods (What we send to Slack)] (https://api.slack.com/methods)

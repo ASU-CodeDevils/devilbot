@@ -3,15 +3,16 @@
 
 ## Table of Contents
 1. [Overview](#overview)
-1. [Prereqs](#prereqs)
-1. [Getting Started with Git](#getting-started-with-git)
-1. [Set up AWS account](#set-up-aws-account)
-1. [Connecting to your AWS Account to your personal device](#connecting-to-your-aws-account-to-your-personal-device)
-1. [Set up project for AL2 target Mac, Ubuntu (aarch64/x86_64), and Windows (WSL 2 Ubuntu 20.04 LTS)](#set-up-project-for-al2-target-mac-ubuntu-aarch64x86_64-and-windows-wsl-2-ubuntu-2004-lts)
-1. [After your project is set up use the following to build your code and deploy it to AWS test](#after-your-project-is-set-up-use-the-following-to-build-your-code-and-deploy-it-to-aws-test)
-1. [Setting up to test against a personal Slack bot](#setting-up-to-test-against-a-personal-slack-bot)
-1. [Useful CDK commands and their descriptions](#useful-cdk-commands-and-their-descriptions)
-1. [How to Enable API Throttling](#how-to-enable-api-throttling)
+2. [Prereqs](#prereqs)
+3. [Getting Started with Git](#getting-started-with-git)
+4. [Set up AWS account](#set-up-aws-account)
+5. [Connecting to your AWS Account to your personal device](#connecting-to-your-aws-account-to-your-personal-device)
+6. [Set up project for AL2 target Mac, Ubuntu (aarch64/x86_64), and Windows (WSL 2 Ubuntu 20.04 LTS)](#set-up-project-for-al2-target-mac-ubuntu-aarch64x86_64-and-windows-wsl-2-ubuntu-2004-lts)
+7. [After your project is set up use the following to build your code and deploy it to AWS test](#after-your-project-is-set-up-use-the-following-to-build-your-code-and-deploy-it-to-aws-test)
+8. [Setting up to test against a personal Slack bot](#setting-up-to-test-against-a-personal-slack-bot)
+9. [Useful CDK commands and their descriptions](#useful-cdk-commands-and-their-descriptions)
+10. [How to Enable API Throttling](#how-to-enable-api-throttling)
+11. [Useful Slack Documentation](#useful-slack-documentation)
 
 ## Overview
 * A Rust implementation of a Slack bot that will be used by the CodeDevils Slack workspace.

@@ -2,6 +2,7 @@
 // Send a Heart emoji to the channel with the specified timestamp from the message
 use slack_hook::{PayloadBuilder, Slack};
 
+// TODO Use reactions.add
 pub async fn run(channel: &str) {
     let slack_webhook_url: String = crate::get_env_var(crate::DEVIL_BOT_TEST_CHANNEL_URL);
     let slack = Slack::new(&*slack_webhook_url).unwrap();

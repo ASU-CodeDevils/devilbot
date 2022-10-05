@@ -5,6 +5,7 @@ use slack_hook::{PayloadBuilder, Slack};
 // if the text contains any form of "buns", it will respond with "You are buns".
 // This can be used as an example command when creating new commands for
 // the Slack bot.
+// TODO: respond with just a buns emoji to the message
 pub async fn run(channel: &str, enterprise_user_id: &str) {
     increment_buns(enterprise_user_id).await;
     let slack_webhook_url: String = crate::get_env_var(crate::DEVIL_BOT_TEST_CHANNEL_URL);

@@ -55,12 +55,19 @@ async fn intercept_challenge_request(body: &Value) -> String {
         log::info!("{}", challenge_info);
     }
 
-    return challenge.to_string();
+    challenge.to_string()
 }
 
 // This function parses the event body received in the request
 // and pulls out the Slack message text if there is any.
 async fn intercept_command(body: &Value) {
+    let event_type: &str = body["event"]["type"]
+        .as_str()
+        .unwrap_or("invalid event type");
+    match event_type {
+        "team_join" => commands::onboard_user::run(body).await,
+        event_type => log::info!("invalid event type {}", event_type),
+    }
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");
@@ -95,8 +102,11 @@ async fn intercept_command(body: &Value) {
         "ping" => commands::ping::run(channel).await,
         _ => log::info!("Invalid command: {:?}", ..),
     }
+    // if text.contains("buns") {
+    //     commands::buns::run(channel, enterprise_user_id).await;
+    // }
     if text.contains("buns") {
-        commands::buns::run(channel, enterprise_user_id).await;
+        commands::onboard_user::run(body).await;
     }
 }
 

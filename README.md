@@ -176,5 +176,5 @@ Postman is a UI alternative to using [`curl`](https://everything.curl.dev).
 * This is pretty customizable. Recommended to cap your requests per month at 900,000
 
 ### Useful Slack Documentation
-* [Events API (What comes to our bot from Slack)] (https://api.slack.com/events)
-* [Web API Methods (What we send to Slack)] (https://api.slack.com/methods)
+* [Events API (What comes to our bot from Slack)](https://api.slack.com/events)
+* [Web API Methods (What we send to Slack)](https://api.slack.com/methods)

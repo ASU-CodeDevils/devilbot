@@ -13,7 +13,7 @@ pub async fn post_message(json: &Value) {
         .unwrap();
     log::info!("Chat Post Message Response: {:?}", message_res);
     match message_res.status() {
-        StatusCode::OK => println!("chat onboard success!"),
+        StatusCode::OK => println!("Message sent success!"),
         StatusCode::PAYLOAD_TOO_LARGE => {
             println!("Request payload is too large!");
         }

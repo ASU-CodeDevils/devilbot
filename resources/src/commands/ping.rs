@@ -1,22 +1,15 @@
-use slack_hook::{PayloadBuilder, Slack};
+use crate::commands::chat_post_message;
+use serde_json::json;
 
 // This function parses the text event from the slack event subscription
 // if the text contains any form of "ping", it will respond with "pong".
 // This can be used as an example command when creating new commands for
 // the Slack bot.
 pub async fn run(channel: &str) {
-    let slack_webhook_url: String = crate::get_env_var(crate::DEVIL_BOT_TEST_CHANNEL_URL);
-    let slack = Slack::new(&*slack_webhook_url).unwrap();
-    let p = PayloadBuilder::new()
-        .text("pong")
-        .channel(channel)
-        .username("DevilBot")
-        .build()
-        .unwrap();
-
-    let res: Result<(), slack_hook::Error> = slack.send(&p);
-    match res {
-        Ok(()) => log::info!("Slack message sent successfully."),
-        Err(x) => log::info!("ERR: {}", x),
-    }
+    let text = "pong";
+    let chat_request_json = json!({
+        "channel": channel,
+        "text": text,
+    });
+    let status = chat_post_message::post_message(&chat_request_json).await;
 }

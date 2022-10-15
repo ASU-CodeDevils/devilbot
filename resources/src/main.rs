@@ -55,12 +55,25 @@ async fn intercept_challenge_request(body: &Value) -> String {
         log::info!("{}", challenge_info);
     }
 
-    return challenge.to_string();
+    challenge.to_string()
 }
 
 // This function parses the event body received in the request
 // and pulls out the Slack message text if there is any.
 async fn intercept_command(body: &Value) {
+    let event_type: &str = body["event"]["type"]
+        .as_str()
+        .unwrap_or("invalid event type");
+    let username: &str = body["event"]["user"]["id"]
+        .as_str()
+        .unwrap_or("invalid_user_name");
+    let first_name: &str = body["event"]["user"]["profile"]["first_name"]
+        .as_str()
+        .unwrap_or("");
+    match event_type {
+        "team_join" => commands::onboard_user::run(username, first_name).await,
+        event_type => log::info!("invalid event type {}", event_type),
+    }
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");

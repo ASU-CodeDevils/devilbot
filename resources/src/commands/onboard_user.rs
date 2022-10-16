@@ -9,7 +9,7 @@ pub async fn run(username: &str, first_name: &str) {
         <#C2N5P84BD>. Most of my creators are there all day.", &first_name);
 
     // After acceptance testing change this to the username
-    let conversation_with_user_and_devilbot_payload = json!({ "users": "WGJRL9NJD" });
+    let conversation_with_user_and_devilbot_payload = json!({ "users": username });
     let conversations_open_response =
         conversations_open::open_conversation(&conversation_with_user_and_devilbot_payload).await;
     log::info!(

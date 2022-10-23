@@ -7,3 +7,7 @@ const app = new cdk.App();
 new DevilBotRustCdkStack(app, 'DevilBotRustCdkStack', {
     env: { region: app.node.tryGetContext('region') || 'us-east-1' },
 });
+// Dev stage
+new DevilBotRustCdkStack(app, 'DevilBotRustCdkStackDev', {
+    env: { region: app.node.tryGetContext('region') || 'us-east-1' },
+});

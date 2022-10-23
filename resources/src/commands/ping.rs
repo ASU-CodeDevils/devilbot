@@ -11,5 +11,5 @@ pub async fn run(channel: &str) {
         "channel": channel,
         "text": text,
     });
-    let status = chat_post_message::post_message(&chat_request_json).await;
+    let _status = chat_post_message::post_message(&chat_request_json).await;
 }

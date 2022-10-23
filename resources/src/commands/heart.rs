@@ -4,7 +4,7 @@ use slack_hook::{PayloadBuilder, Slack};
 
 // TODO Use reactions.add
 pub async fn run(channel: &str) {
-    let slack_webhook_url: String = crate::get_env_var(crate::DEVIL_BOT_TEST_CHANNEL_URL);
+    let slack_webhook_url: String = crate::get_env_var("DEVIL_BOT_TEST_CHANNEL_URL");
     let slack = Slack::new(&*slack_webhook_url).unwrap();
     let p = PayloadBuilder::new()
         .text("This message should have a heart? :heart:")

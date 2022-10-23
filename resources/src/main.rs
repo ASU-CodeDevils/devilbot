@@ -1,3 +1,4 @@
+use crate::event_handlers::message_event_handler;
 use lambda_http::{service_fn, Error, IntoResponse, Request};
 use log::LevelFilter;
 use serde_json::{json, Value};
@@ -6,9 +7,9 @@ use std::{env, process};
 
 mod aws;
 mod commands;
+mod event_handlers;
 
 const BUNS_TABLE_NAME: &str = "BUNS_TABLE_NAME";
-const DEVIL_BOT_TEST_CHANNEL_URL: &str = "DEVIL_BOT_TEST_CHANNEL_URL";
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -61,55 +62,18 @@ async fn intercept_challenge_request(body: &Value) -> String {
 // This function parses the event body received in the request
 // and pulls out the Slack message text if there is any.
 async fn intercept_command(body: &Value) {
+    // Deconstruct the event type
     let event_type: &str = body["event"]["type"]
         .as_str()
         .unwrap_or("invalid event type");
-    let username: &str = body["event"]["user"]["id"]
-        .as_str()
-        .unwrap_or("invalid_user_name");
-    let first_name: &str = body["event"]["user"]["profile"]["first_name"]
-        .as_str()
-        .unwrap_or("");
+    // Call the correct event handler
     match event_type {
-        "team_join" => commands::onboard_user::run(username, first_name).await,
-        event_type => log::info!("invalid event type {}", event_type),
-    }
-    let channel: &str = body["event"]["channel"]
-        .as_str()
-        .unwrap_or("invalid_channel");
-    let text: String = body["event"]["text"]
-        .as_str()
-        .unwrap_or("invalid_text")
-        .to_lowercase();
-    let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
-    let is_bot: bool = body["event"]["subtype"] == "bot_message";
-
-    log::info!(
-        "text: {}, channel: {}, user_id: {}, is_bot {}",
-        text,
-        channel,
-        enterprise_user_id,
-        is_bot
-    );
-    log::info!("Body {}", body);
-
-    // Prevent responding to any channel other than Test
-    if channel != "C0351GJ62Q0" {
-        log::info!("This channel is not an allowed channel");
-        return;
-    }
-    // Prevent responding to bots
-    if is_bot {
-        log::info!("This is a bot");
-        return;
-    }
-    match text.as_str() {
-        // Add new commands below and create new async functions for them.
-        "ping" => commands::ping::run(channel).await,
-        _ => log::info!("Invalid command: {:?}", ..),
-    }
-    if text.contains("buns") {
-        commands::buns::run(channel, enterprise_user_id).await;
+        "team_join" => event_handlers::team_join_event_handler::handle_team_join_event(body).await,
+        "reaction_added" => {
+            event_handlers::reaction_added_event_handler::handle_reaction_added_event(body).await
+        }
+        "message" => message_event_handler::handle_message_event(body).await,
+        _ => log::info!("invalid event type {}", event_type),
     }
 }
 

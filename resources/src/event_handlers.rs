@@ -3,10 +3,6 @@
 // This will allow you to import them into main.rs.
 // Read more here: https://doc.rust-lang.org/rust-by-example/mod.html
 
-pub mod buns;
-pub mod chat_post_message;
-pub mod conversations_open;
-pub mod emoji_reaction;
-pub mod heart;
-pub mod onboard_user;
-pub mod ping;
+pub mod message_event_handler;
+pub mod reaction_added_event_handler;
+pub mod team_join_event_handler;

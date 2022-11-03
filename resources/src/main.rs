@@ -10,6 +10,7 @@ mod commands;
 mod event_handlers;
 
 const BUNS_TABLE_NAME: &str = "BUNS_TABLE_NAME";
+const DEVIL_BOT_TEST_CHANNEL_URL: &str = "DEVIL_BOT_TEST_CHANNEL_URL";
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {

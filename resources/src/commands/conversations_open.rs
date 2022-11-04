@@ -1,6 +1,7 @@
 use reqwest::StatusCode;
 use serde_json::Value;
 // Opens a conversation. See https://api.slack.com/methods/conversations.open for request json examples
+// TODO move to slack morphism.
 pub async fn open_conversation(json: &Value) -> Value {
     let devil_bot_auth_token: String = crate::get_env_var("SLACK_API_BOT_TOKEN");
     let client = reqwest::Client::new();

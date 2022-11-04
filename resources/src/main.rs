@@ -6,9 +6,9 @@ use std::{env, process};
 
 mod aws;
 mod commands;
+mod slack;
 
 const BUNS_TABLE_NAME: &str = "BUNS_TABLE_NAME";
-const DEVIL_BOT_TEST_CHANNEL_URL: &str = "DEVIL_BOT_TEST_CHANNEL_URL";
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -77,6 +77,7 @@ async fn intercept_command(body: &Value) {
     let channel: &str = body["event"]["channel"]
         .as_str()
         .unwrap_or("invalid_channel");
+    let timestamp: &str = body["event"]["ts"].as_str().unwrap_or("invalid_timestamp");
     let text: String = body["event"]["text"]
         .as_str()
         .unwrap_or("invalid_text")
@@ -109,7 +110,9 @@ async fn intercept_command(body: &Value) {
         _ => log::info!("Invalid command: {:?}", ..),
     }
     if text.contains("buns") {
-        commands::buns::run(channel, enterprise_user_id).await;
+        commands::buns::run(channel, enterprise_user_id, timestamp)
+            .await
+            .unwrap_or_else(|err| log::info!("Error running buns command: {}", err));
     }
 }
 

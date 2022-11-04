@@ -30,8 +30,6 @@ export class DevilBotRustCdkStack extends Stack {
       environment: { // Fill in your personal app's webhook URLs below when testing (remove them when creating a PR)
         RUST_BACKTRACE: "1",
         SLACK_API_BOT_TOKEN: "",
-        DEVIL_BOT_TEST_CHANNEL_URL: "",
-        DEVIL_BOT_DEV_CHANNEL_URL: "",
         BUNS_TABLE_NAME: bunsTable.tableName
       },
       logRetention: RetentionDays.ONE_DAY, // There will be a lot of event logs, this will make sure to cut down on costs

@@ -12,7 +12,7 @@
 8. [Setting up to test against a personal Slack bot](#setting-up-to-test-against-a-personal-slack-bot)
 9. [Useful CDK commands and their descriptions](#useful-cdk-commands-and-their-descriptions)
 10. [How to Enable API Throttling](#how-to-enable-api-throttling)
-11. [Useful Slack Documentation](#useful-slack-documentation)
+11. [Slack-Morphism](#slack-morphism)
 
 ## Overview
 * A Rust implementation of a Slack bot that will be used by the CodeDevils Slack workspace.
@@ -80,18 +80,26 @@ https://docs.microsoft.com/en-us/windows/wsl/install
 1. Click on "Prod" under "Stages".
 1. Copy the "Invoke URL" provided.
 1. Contact one of our officers and tell them you have your Slack bot API Gateway endpoint ready for a personal Slack bot app.
-1. Provide the officer with the URL and they will give you a Slack webhook URL which you can then plug in to the `environment` list in `devil-bot-rust-cdk-stack.ts`.
-1. This will allow you to test in the `#devil-bot-test Slack` channel while you are developing.
-1. When you have your code ready for review, remove the environment variable before creating your PR. Follow the instructions found in `CONTRIBUTING.md` for more info on creating your PR.
+1. Provide the officer with the URL and they will give you a Bot API Token which you can then plug in to the `environment` list in `devil-bot-rust-cdk-stack.ts`.
+1. While you are developing, make sure to limit you testing to the `#devil-bot-test` channel in Slack. Or if you are testing a feture that is not in a channel, reach out to Rhett or Jason for some creative ideas to test. We don't want to spam other public channels. The ID for the test channel is `C0351GJ62Q0`
+1. When you have your code ready for review, remove the environment variable for the Bot token before creating your PR. Follow the instructions found in `CONTRIBUTING.md` for more info on creating your PR. If you don't remove this token before making a commit, Slack will uninstall your bot.
 
 ## Useful CDK commands and their descriptions
  * `npm run build`   compile typescript to js
  * `npm run watch`   watch for changes and compile
  * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy all stacks to your default AWS account/region
+ * `cargo fmt --all --check --manifest-path resources/Cargo.toml` Checks code formatting for Rust
+ * `rustup update`   update Rust
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
- * `cargo fmt --all --check --manifest-path resources/Cargo.toml` Checks code formatting for Rust
+ * `cdk deploy`      deploy all stacks to your default AWS account/region
+ * `cdk deploy --app 'cdk.out/' DevilBotRustCdkStack` Deploys to the production Stack of your DevilBot (not the real production version)
+ * `cdk deploy --app 'cdk.out/' DevilBotRustCdkStackDev` Deploys the Dev Stack of your Devil Bot
+ 
+Any of these three commands `cdk deploy` `cdk deploy --app 'cdk.out/' DevilBotRustCdkStack` `cdk deploy --app 'cdk.out/' DevilBotRustCdkStackDev` will deploy your DevilBot to AWS. We run this app in two stages so it is essentially like having two separate apps. This is mainly so Rhett can deploy the production version from the same account his dev version is on. You are fine to use either stages or both on your account, but:
+ 
+ * Make sure that you have the correct API key for that Bot or else it won't function. 
+ * Make sure that the invoke URL you use for that Bot is the same one that is on the Stage you are expecting
 
 ## Testing with POST requests
 Sometimes you may not want to spam messages into the Slack channels when you want to test. In this case you can POST messages directly to your API Gateway endpoint and view CloudWatch logs to troubleshoot problems with your code.
@@ -175,8 +183,9 @@ Postman is a UI alternative to using [`curl`](https://everything.curl.dev).
 3. Click on RustSlackEndpoint
 4. In the left menu, click on Usage Plans
 5. In the Usage Plans menu, create a new usage plan
-* This is pretty customizable. Recommended to cap your requests per month at 900,000
 
-### Useful Slack Documentation
-* [Events API (What comes to our bot from Slack)](https://api.slack.com/events)
-* [Web API Methods (What we send to Slack)](https://api.slack.com/methods)
+This is pretty customizable. Recommended to cap your requests per month at 900,000
+
+### Slack Morphism
+* [Link to Slack-Morphism Documentation](https://slack-rust.abdolence.dev/)
+

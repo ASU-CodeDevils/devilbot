@@ -19,7 +19,10 @@ pub async fn handle_message_event(body: &Value) {
     let timestamp: &str = body["event"]["event_ts"]
         .as_str()
         .unwrap_or("invalid_timestamp");
-    let enterprise_user_id: &str = body["enterprise_id"].as_str().unwrap_or("invalid_channel");
+    let enterprise_user_id: &str = body["enterprise_id"]
+        .as_str()
+        .unwrap_or("invalid_enterprise_user_id");
+    let _user: &str = body["event"]["user"].as_str().unwrap_or("invalid_user");
 
     // Match appropriate function
     match text.as_str() {

@@ -1,7 +1,8 @@
-use crate::slack::client::build_token;
 use slack_morphism::prelude::*;
 
-// This function will add the specified reaction to a message identifed by its timestamp.
+use crate::slack::client::build_token;
+
+// This function will add the specified reaction to a message identified by its timestamp.
 pub async fn run(
     channel: &str,
     timestamp: &str,
@@ -14,7 +15,8 @@ pub async fn run(
     let add_reaction_request =
         SlackApiReactionsAddRequest::new(channel.into(), reaction.into(), timestamp.into());
 
-    let _add_reaction_response = session.reactions_add(&add_reaction_request).await?;
+    let _add_reaction_response: SlackApiReactionsAddResponse =
+        session.reactions_add(&add_reaction_request).await?;
 
     Ok(())
 }

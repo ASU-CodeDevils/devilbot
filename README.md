@@ -65,9 +65,10 @@ https://docs.microsoft.com/en-us/windows/wsl/install
 1. `cdk deploy`
 
 ## After your project is set up use the following to build your code and deploy it to AWS test
+### Note: This will deploy only to dev
 1. `sh build-function.sh`
-1. `cdk diff` (optional, but useful command)
-1. `cdk deploy`
+2. `cdk diff` (optional, but useful command)
+3. `cdk deploy --app 'cdk.out/' DevilBotRustCdkStack` 
 
 ## Setting up to test against a personal Slack bot
 1. Do the following after creating the above infrastructure (after successfully running `cdk deploy` to your personal AWS account).
@@ -87,9 +88,10 @@ https://docs.microsoft.com/en-us/windows/wsl/install
  * `npm run build`   compile typescript to js
  * `npm run watch`   watch for changes and compile
  * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
+ * `cdk deploy`      deploy all stacks to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
+ * `cargo fmt --all --check --manifest-path resources/Cargo.toml` Checks code formatting for Rust
 
 ## Testing with POST requests
 Sometimes you may not want to spam messages into the Slack channels when you want to test. In this case you can POST messages directly to your API Gateway endpoint and view CloudWatch logs to troubleshoot problems with your code.

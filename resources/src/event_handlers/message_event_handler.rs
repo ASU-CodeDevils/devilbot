@@ -1,5 +1,6 @@
-use crate::commands;
 use serde_json::Value;
+
+use crate::commands;
 
 pub async fn handle_message_event(body: &Value) {
     // Destructure everything needed
@@ -27,6 +28,8 @@ pub async fn handle_message_event(body: &Value) {
         _ => log::info!("Invalid command: {:?}", ..),
     }
     if text.contains("buns") {
-        commands::buns::run(channel, enterprise_user_id, timestamp).await;
+        commands::buns::run(channel, enterprise_user_id, timestamp)
+            .await
+            .unwrap_or_else(|err| log::info!("Error running buns command: {}", err));
     }
 }

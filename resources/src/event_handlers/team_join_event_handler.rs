@@ -1,5 +1,7 @@
-use crate::commands;
 use serde_json::Value;
+
+use crate::commands;
+
 pub async fn handle_team_join_event(body: &Value) {
     // Deconstruct the body
     let username: &str = body["event"]["user"]["id"]
@@ -16,5 +18,7 @@ pub async fn handle_team_join_event(body: &Value) {
 
     // Call onboard user
     // Add anything else here that should happen when a user joins the workspace
-    commands::onboard_user::run(username, first_name).await
+    commands::onboard_user::run(username, first_name)
+        .await
+        .unwrap();
 }

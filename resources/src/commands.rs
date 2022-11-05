@@ -4,7 +4,6 @@
 // Read more here: https://doc.rust-lang.org/rust-by-example/mod.html
 
 pub mod buns;
-pub mod chat_post_message;
 pub mod conversations_open;
 pub mod onboard_user;
 pub mod ping;

@@ -1,5 +1,7 @@
 use reqwest::StatusCode;
 use serde_json::Value;
+
+// TODO: Move to Slack-Morphism after they accept PR #154
 // Sends an emoji reaction to the passed in json
 // Add requirements for json string here for it to be used
 pub async fn reactions_add(json: &Value) -> Value {

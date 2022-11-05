@@ -15,6 +15,5 @@ pub async fn run(
     add_reaction::run(channel, timestamp, "buns")
         .await
         .unwrap_or_else(|err| log::info!("Reaction add error: {}", err));
-
     Ok(())
 }

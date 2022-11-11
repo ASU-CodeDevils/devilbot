@@ -1,5 +1,9 @@
 use aws_sdk_dynamodb::{model::AttributeValue, Client, Error};
 
+/**
+ * Increments an item_name associated with a user_id in a specified AWS DynamoDB
+ * table. If no entries exist, a new one will be created in the table.
+ */
 pub async fn increment_item(
     table_name: &str,
     key: &str,

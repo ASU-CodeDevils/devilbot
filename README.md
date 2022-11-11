@@ -92,7 +92,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install
  * `rustup update`   update Rust
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy all stacks to your default AWS account/region
+ * `cdk deploy --all`      deploy all stacks to your default AWS account/region
  * `cdk deploy --app 'cdk.out/' DevilBotRustCdkStack` Deploys to the production Stack of your DevilBot (not the real production version)
  * `cdk deploy --app 'cdk.out/' DevilBotRustCdkStackDev` Deploys the Dev Stack of your Devil Bot
  

@@ -4,8 +4,11 @@ use slack_morphism::{SlackApiToken, SlackBasicChannelInfo, SlackClient};
 
 use crate::slack::client::build_token;
 
-// Opens a conversation. See https://api.slack.com/methods/conversations.open for request json examples
-pub async fn open_conversation(
+/**
+ * Opens a conversation.
+ * See https://api.slack.com/methods/conversations.open for request JSON examples.
+ */
+pub async fn open(
     users: Vec<&str>,
 ) -> Result<
     SlackApiConversationsOpenResponse<SlackBasicChannelInfo>,

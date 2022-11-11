@@ -1,6 +1,6 @@
 use serde_json::Value;
 
-use crate::slack::add_reaction;
+use crate::slack;
 
 pub async fn handle_reaction_added_event(body: &Value) {
     // deconstruct the information needed from the event
@@ -59,7 +59,7 @@ pub async fn handle_reaction_added_event(body: &Value) {
         "temple-of-rust",
     ];
     if emojis_to_copy.contains(&reaction) {
-        add_reaction::run(channel, timestamp, reaction)
+        slack::reactions::add(channel, timestamp, reaction)
             .await
             .unwrap_or_else(|err| log::info!("Error adding reaction: {}", err))
     }

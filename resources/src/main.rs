@@ -10,6 +10,8 @@ mod commands;
 mod event_handlers;
 mod slack;
 
+const BUNS_TABLE_NAME: &str = "BUNS_TABLE_NAME";
+
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     SimpleLogger::new()
@@ -23,11 +25,9 @@ async fn main() -> Result<(), Error> {
     Ok(())
 }
 
-/**
- * This is the main event handler in the AWS Lambda. It parses the
- * requests that were sent to the static endpoint behind our AWS
- * API Gateway.
- */
+// This is the main event handler in the AWS Lambda. It parses the
+// requests that were sent to the static endpoint behind our AWS
+// API Gateway.
 async fn handler(request: Request) -> Result<impl IntoResponse, Error> {
     let (_parts, body) = request.into_parts();
     let body: Value = serde_json::from_slice(&body)?;
@@ -38,12 +38,10 @@ async fn handler(request: Request) -> Result<impl IntoResponse, Error> {
     Ok(json!({ "challenge": challenge }))
 }
 
-/**
- * When you create a Slack event subscription, your endpoint needs
- * to respond to a challenge request with the challenge ID for
- * the subscription to be successfully created.
- * Read more here: https://api.slack.com/apis/connections/events-api
- */
+// When you create a Slack event subscription, your endpoint needs
+// to respond to a challenge request with the challenge ID for
+// the subscription to be successfully created.
+// Read more here: https://api.slack.com/apis/connections/events-api
 async fn intercept_challenge_request(body: &Value) -> String {
     let token: &str = body["token"].as_str().unwrap_or("invalid_token");
     let challenge: &str = body["challenge"].as_str().unwrap_or("invalid_challenge");
@@ -62,10 +60,8 @@ async fn intercept_challenge_request(body: &Value) -> String {
     challenge.to_string()
 }
 
-/**
- * This function parses the event body received in the request
- * and pulls out the Slack message text if there is any.
- */
+// This function parses the event body received in the request
+// and pulls out the Slack message text if there is any.
 async fn intercept_command(body: &Value) {
     let is_bot: bool = body["event"]["subtype"] == "bot_message";
     if is_bot {
@@ -85,11 +81,9 @@ async fn intercept_command(body: &Value) {
     }
 }
 
-/**
- * Helper function for getting Lambda environment variables. If
- * you want to add new env vars, you can add them to the
- * environment list in the devil-bot-rust-cdk-stack.ts file.
- */
+// Helper function for getting Lambda environment variables. If
+// you want to add new env vars, you can add them to the
+// environment list in the devil-bot-rust-cdk-stack.ts file.
 pub fn get_env_var(env_var: &str) -> String {
     match env::var(env_var) {
         Ok(val) => val,
@@ -98,4 +92,11 @@ pub fn get_env_var(env_var: &str) -> String {
             process::exit(1);
         }
     }
+}
+
+pub async fn increment_buns(enterprise_user_id: &str) {
+    let buns_table_name: String = get_env_var(BUNS_TABLE_NAME);
+    aws::dynamo::increment_item(&*buns_table_name, "user_id", enterprise_user_id, "buns")
+        .await
+        .unwrap_or_else(|err| log::info!("DynamoDB increment buns error: {}", err));
 }

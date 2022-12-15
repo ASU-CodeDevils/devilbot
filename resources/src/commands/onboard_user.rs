@@ -1,6 +1,7 @@
 use slack_morphism::SlackTextFormat;
 
-use crate::slack;
+use crate::commands::conversations_open;
+use crate::slack::chat_post_message;
 
 // TODO: write docs
 pub async fn run(
@@ -13,11 +14,11 @@ pub async fn run(
         <#C2N5P84BD>. Most of my creators are there all day.", &first_name);
 
     let users_vec = vec![username];
-    let conversations_open_response = slack::conversations::open(users_vec).await?;
+    let conversations_open_response = conversations_open::open_conversation(users_vec).await?;
     let channel_id = conversations_open_response.channel.id.to_slack_format();
     log::info!("Channel Id {:?}", channel_id);
 
-    slack::chat::post_message(&text, &channel_id)
+    chat_post_message::post_message(&text, &channel_id)
         .await
         .unwrap_or_else(|err| log::info!("Chat post error: {}", err));
     Ok(())

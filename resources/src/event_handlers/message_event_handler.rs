@@ -1,7 +1,7 @@
 use serde_json::Value;
 
 use crate::commands;
-
+use crate::get_env_var;
 pub async fn handle_message_event(body: &Value) {
     // Destructure everything needed
     let is_bot: bool = body["event"]["subtype"] == "bot_message";
@@ -23,6 +23,12 @@ pub async fn handle_message_event(body: &Value) {
         .as_str()
         .unwrap_or("invalid_enterprise_user_id");
     let _user: &str = body["event"]["user"].as_str().unwrap_or("invalid_user");
+    let is_development = get_env_var("IS_DEVELOPMENT");
+    // Stop the function if this is a development environment and outside the test channel
+    if channel != "C0351GJ62Q0" && is_development == "true" {
+        log::info!("This is a development environment {}", is_development);
+        return;
+    }
 
     // Match appropriate function
     match text.as_str() {

@@ -1,5 +1,6 @@
 use serde_json::Value;
 
+use crate::get_env_var;
 use crate::slack::add_reaction;
 
 pub async fn handle_reaction_added_event(body: &Value) {
@@ -21,6 +22,12 @@ pub async fn handle_reaction_added_event(body: &Value) {
         channel,
         timestamp
     );
+    let is_development = get_env_var("IS_DEVELOPMENT");
+    // Stop the function if this is a development environment and outside the test channel
+    if channel != "C0351GJ62Q0" && is_development == "true" {
+        log::info!("This is a development environment {}", is_development);
+        return;
+    }
     // Add any other emojis to copy against here
     // Please keep alphabetized
     let emojis_to_copy = vec![

@@ -1,6 +1,7 @@
 use serde_json::Value;
 
 use crate::commands;
+use crate::get_env_var;
 
 pub async fn handle_team_join_event(body: &Value) {
     // Deconstruct the body
@@ -14,6 +15,12 @@ pub async fn handle_team_join_event(body: &Value) {
     if first_name == "invalid_first_name" {
         log::info!("Invalid First Name");
         first_name = "";
+    }
+    let is_development = get_env_var("IS_DEVELOPMENT");
+    // Stop the function if this is a development environment and outside the test channel
+    if is_development == "true" {
+        log::info!("This is a development environment {}", is_development);
+        return;
     }
 
     // Call onboard user

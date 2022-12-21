@@ -34,4 +34,13 @@ pub async fn handle_message_event(body: &Value) {
 
     // Match appropriate function
     match text.as_str() {
-    
+        // Add new commands below and create new async functions for them.
+        "ping" => commands::ping::run(channel).await,
+        _ => log::info!("Invalid command: {:?}", ..),
+    }
+    if text.contains("buns") {
+        commands::buns::run(channel, enterprise_user_id, timestamp)
+            .await
+            .unwrap_or_else(|err| log::info!("Error running buns command: {}", err));
+    }
+}

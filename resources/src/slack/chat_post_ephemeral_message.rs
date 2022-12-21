@@ -8,7 +8,7 @@ use slack_morphism::{
 
 use crate::slack::client::build_token;
 
-pub async fn post_ephemeral_message(
+pub async fn _post_ephemeral_message(
     channel: &str,
     user: &str,
     text: &str,

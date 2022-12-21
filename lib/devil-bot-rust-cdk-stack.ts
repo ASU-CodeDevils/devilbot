@@ -32,6 +32,7 @@ export class DevilBotRustCdkStack extends Stack {
         SLACK_API_BOT_TOKEN: "",
         BUNS_TABLE_NAME: bunsTable.tableName,
         IS_DEVELOPMENT: "true",
+        TEST_CHANNEL_ID: "C0351GJ62Q0",
       },
       logRetention: RetentionDays.ONE_DAY, // There will be a lot of event logs, this will make sure to cut down on costs
     });

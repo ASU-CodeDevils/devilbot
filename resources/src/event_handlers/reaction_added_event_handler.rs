@@ -22,9 +22,10 @@ pub async fn handle_reaction_added_event(body: &Value) {
         channel,
         timestamp
     );
-    let is_development = get_env_var("IS_DEVELOPMENT");
+    let is_development: bool = get_env_var("IS_DEVELOPMENT").parse().unwrap();
+    let test_channel_id = get_env_var("TEST_CHANNEL_ID");
     // Stop the function if this is a development environment and outside the test channel
-    if channel != "C0351GJ62Q0" && is_development == "true" {
+    if channel != test_channel_id && is_development {
         log::info!("This is a development environment {}", is_development);
         return;
     }

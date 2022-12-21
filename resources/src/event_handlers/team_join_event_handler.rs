@@ -16,16 +16,6 @@ pub async fn handle_team_join_event(body: &Value) {
         log::info!("Invalid First Name");
         first_name = "";
     }
-    let is_development = get_env_var("IS_DEVELOPMENT");
+    let is_development: bool = get_env_var("IS_DEVELOPMENT").parse().unwrap();
     // Stop the function if this is a development environment and outside the test channel
-    if is_development == "true" {
-        log::info!("This is a development environment {}", is_development);
-        return;
-    }
-
-    // Call onboard user
-    // Add anything else here that should happen when a user joins the workspace
-    commands::onboard_user::run(username, first_name)
-        .await
-        .unwrap();
-}
+   

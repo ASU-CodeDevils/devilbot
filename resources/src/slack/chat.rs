@@ -1,12 +1,42 @@
 use slack_morphism::hyper_tokio::SlackClientHyperConnector;
 use slack_morphism::prelude::{
     SlackApiChatPostEphemeralRequest, SlackApiChatPostEphemeralResponse,
+    SlackApiChatPostMessageRequest, SlackApiChatPostMessageResponse,
 };
 use slack_morphism::{
     SlackApiToken, SlackChannelId, SlackClient, SlackMessageContent, SlackUserId,
 };
 
 use crate::slack::client::build_token;
+
+/**
+ * Posts a message to the specified Slack channel.
+ * See https://api.slack.com/methods/chat.postMessage for request JSON examples.
+ */
+pub async fn post_message(
+    text: &str,
+    channel: &str,
+    thread_timestamp: Option<&str>,
+) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    let client = SlackClient::new(SlackClientHyperConnector::new());
+    let slack_token: SlackApiToken = build_token().await;
+    let session = client.open_session(&slack_token);
+
+    let post_chat_request = SlackApiChatPostMessageRequest::new(
+        channel.into(),
+        SlackMessageContent::new().with_text(text.into()),
+    );
+
+    // If thread_timestamp is not None, then we are replying to a message
+    let post_chat_request = match thread_timestamp {
+        Some(ts) => post_chat_request.with_thread_ts(ts.into()),
+        None => post_chat_request,
+    };
+
+    let _post_chat_response: SlackApiChatPostMessageResponse =
+        session.chat_post_message(&post_chat_request).await?;
+    Ok(())
+}
 
 pub async fn _post_ephemeral_message(
     channel: &str,

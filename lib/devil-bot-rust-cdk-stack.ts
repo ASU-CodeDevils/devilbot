@@ -1,9 +1,9 @@
-import { Construct, Stack, StackProps } from "@aws-cdk/core";
-import { Architecture, Code, Function, Runtime } from "@aws-cdk/aws-lambda";
-import { Policy, PolicyStatement } from "@aws-cdk/aws-iam";
-import { LambdaRestApi } from '@aws-cdk/aws-apigateway';
-import { Table, AttributeType } from '@aws-cdk/aws-dynamodb';
-import { RetentionDays } from "@aws-cdk/aws-logs";
+import {Construct, Stack, StackProps} from "@aws-cdk/core";
+import {Architecture, Code, Function, Runtime} from "@aws-cdk/aws-lambda";
+import {Policy, PolicyStatement} from "@aws-cdk/aws-iam";
+import {LambdaRestApi} from '@aws-cdk/aws-apigateway';
+import {AttributeType, Table} from '@aws-cdk/aws-dynamodb';
+import {RetentionDays} from "@aws-cdk/aws-logs";
 
 export class DevilBotRustCdkStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -27,12 +27,13 @@ export class DevilBotRustCdkStack extends Stack {
       runtime: Runtime.PROVIDED_AL2,
       architecture: Architecture.X86_64,
       handler: "not.required",
-      environment: { // Fill in your personal app's webhook URLs below when testing (remove them when creating a PR)
+      environment: { // Fill in your personal app's token below when testing (remove them when creating a PR)
         RUST_BACKTRACE: "1",
         SLACK_API_BOT_TOKEN: "",
         BUNS_TABLE_NAME: bunsTable.tableName,
         IS_DEVELOPMENT: "true",
-        TEST_CHANNEL_ID: "C0351GJ62Q0",
+        TEST_CHANNEL_ID: "",
+        INTROS_CHANNEL_ID: "",
       },
       logRetention: RetentionDays.ONE_DAY, // There will be a lot of event logs, this will make sure to cut down on costs
     });

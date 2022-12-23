@@ -12,7 +12,7 @@ pub async fn run(
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     increment_buns(enterprise_user_id).await;
 
-    add_reaction::run(channel, timestamp, "buns")
+    add_reaction::add_reaction(channel, timestamp, "buns")
         .await
         .unwrap_or_else(|err| log::info!("Reaction add error: {}", err));
     Ok(())

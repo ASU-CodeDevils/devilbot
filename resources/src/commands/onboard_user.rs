@@ -18,7 +18,7 @@ pub async fn run(
     let channel_id = conversations_open_response.channel.id.to_slack_format();
     log::info!("Channel Id {:?}", channel_id);
 
-    chat_post_message::post_message(&text, &channel_id)
+    chat_post_message::post_message(&text, &channel_id, Option::None)
         .await
         .unwrap_or_else(|err| log::info!("Chat post error: {}", err));
     Ok(())

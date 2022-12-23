@@ -3,7 +3,7 @@ use slack_morphism::prelude::*;
 use crate::slack::client::build_token;
 
 // This function will add the specified reaction to a message identified by its timestamp.
-pub async fn run(
+pub async fn add_reaction(
     channel: &str,
     timestamp: &str,
     reaction: &str,

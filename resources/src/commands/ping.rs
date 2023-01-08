@@ -1,4 +1,4 @@
-use crate::slack::chat_post_message;
+use crate::slack;
 
 // This function parses the text event from the slack event subscription
 // if the text contains any form of "ping", it will respond with "pong".
@@ -6,5 +6,5 @@ use crate::slack::chat_post_message;
 // the Slack bot.
 pub async fn run(channel: &str) {
     let text = "pong";
-    let _status = chat_post_message::post_message(text, channel).await;
+    let _status = slack::chat::post_message(text, channel, Option::None).await;
 }

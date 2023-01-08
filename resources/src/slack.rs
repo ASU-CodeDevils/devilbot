@@ -1,4 +1,4 @@
-pub mod add_reaction;
-pub mod chat_post_ephemeral_message;
-pub mod chat_post_message;
+pub mod chat;
 pub mod client;
+pub mod conversations;
+pub mod reactions;

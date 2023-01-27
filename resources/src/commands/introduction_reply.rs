@@ -27,7 +27,7 @@ pub async fn send(
     If you are looking to learn more about programming, I am an official CodeDevils project \
     that can be worked on!"
     );
-    slack::chat::post_message(&text, &intros_channel_id, Some(base_message_timestamp))
+    slack::chat::reply_message(&text, &intros_channel_id, base_message_timestamp)
         .await
         .unwrap_or_else(|err| log::info!("Chat post error: {}", err));
     Ok(())

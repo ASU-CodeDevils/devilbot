@@ -5,7 +5,7 @@ use slack_morphism::api::{
 use slack_morphism::hyper_tokio::SlackClientHyperConnector;
 use slack_morphism::{SlackApiToken, SlackBasicChannelInfo, SlackClient, SlackHistoryMessage};
 
-use crate::slack::client::build_token;
+use crate::slack::client::{build_bot_token, build_user_token};
 
 /**
  * Opens a conversation.
@@ -13,12 +13,16 @@ use crate::slack::client::build_token;
  */
 pub async fn open(
     users: Vec<&str>,
+    is_bot_token: bool,
 ) -> Result<
     SlackApiConversationsOpenResponse<SlackBasicChannelInfo>,
     Box<dyn std::error::Error + Send + Sync>,
 > {
     let client = SlackClient::new(SlackClientHyperConnector::new());
-    let slack_token: SlackApiToken = build_token().await;
+    let slack_token = match is_bot_token {
+        true => build_bot_token().await,
+        false => build_user_token().await,
+    };
     let session = client.open_session(&slack_token);
 
     let conversation_open_request: SlackApiConversationsOpenRequest =
@@ -40,7 +44,7 @@ pub async fn get_replies(
     timestamp: &str,
 ) -> Result<Vec<SlackHistoryMessage>, Box<dyn std::error::Error + Send + Sync>> {
     let client = SlackClient::new(SlackClientHyperConnector::new());
-    let slack_token: SlackApiToken = build_token().await;
+    let slack_token: SlackApiToken = build_bot_token().await;
     let session = client.open_session(&slack_token);
 
     let conversations_replies_request =

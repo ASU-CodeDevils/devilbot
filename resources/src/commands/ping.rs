@@ -6,5 +6,6 @@ use crate::slack;
 // the Slack bot.
 pub async fn run(channel: &str) {
     let text = "pong";
-    let _status = slack::chat::post_message(text, channel, true).await;
+    let _status_with_bot_token = slack::chat::post_message(&text, &channel, true).await;
+    let _status_with_user_token = slack::chat::post_message(text, channel, false).await;
 }

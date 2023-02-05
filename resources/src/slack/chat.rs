@@ -38,6 +38,14 @@ pub async fn post_message(
         session.chat_post_message(&post_chat_request).await?;
     Ok(())
 }
+/**
+ * Posts a reply to a specified message to the specified Slack channel.
+ * See https://api.slack.com/methods/chat.postMessage for request JSON examples.
+ * Parameters:
+ * - text: The text of the message to post.
+ * - channel: The channel to post the message to.
+ * - thread_timestamp: the timestamp of the message to reply to in the specified channel.
+ */
 pub async fn reply_message(
     text: &str,
     channel: &str,

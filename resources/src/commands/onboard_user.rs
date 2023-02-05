@@ -21,7 +21,7 @@ pub async fn run(
     let bot_channel_id = bot_conversations_open_response.channel.id.to_string();
     log::info!("Bot Channel Id {:?}", bot_channel_id);
 
-    // // Build the message to send to the new user
+    // Build the message to send to the new user
     let content_vector: SlackMessageContent =
         SlackMessageContent::new().opt_blocks(build_bot_slack_block_message(first_name).into());
     slack::chat::post_message_with_content(&content_vector, &bot_channel_id, true)

@@ -37,7 +37,7 @@ pub async fn run(
     let message_to_new_user_from_user = format!(
         "Hey {} welcome to CodeDevils! I am Rhett, the \
     President of the organization. Go ahead and introduce yourself over in <#CMGU8033K> and \
-    I look forward to seeing you in <#C2N5P84BD> soon! :partywizard:!",
+    I look forward to seeing you in <#C2N5P84BD> soon! :partywizard:",
         first_name
     );
     slack::chat::post_message(&message_to_new_user_from_user, &user_channel_id, false)

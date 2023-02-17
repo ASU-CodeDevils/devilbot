@@ -1,9 +1,9 @@
-import {Construct, Stack, StackProps} from '@aws-cdk/core'
-import {Architecture, Code, Function, Runtime} from '@aws-cdk/aws-lambda'
-import {Policy, PolicyStatement} from '@aws-cdk/aws-iam'
-import {LambdaRestApi} from '@aws-cdk/aws-apigateway'
-import {AttributeType, Table} from '@aws-cdk/aws-dynamodb'
-import {RetentionDays} from '@aws-cdk/aws-logs'
+import { Construct, Stack, StackProps } from '@aws-cdk/core'
+import { Architecture, Code, Function, Runtime } from '@aws-cdk/aws-lambda'
+import { Policy, PolicyStatement } from '@aws-cdk/aws-iam'
+import { LambdaRestApi } from '@aws-cdk/aws-apigateway'
+import { AttributeType, Table } from '@aws-cdk/aws-dynamodb'
+import { RetentionDays } from '@aws-cdk/aws-logs'
 
 export class DevilBotRustCdkStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {

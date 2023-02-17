@@ -3,7 +3,9 @@ use slack_morphism::api::{
     SlackApiConversationsRepliesRequest, SlackApiConversationsRepliesResponse,
 };
 use slack_morphism::hyper_tokio::SlackClientHyperConnector;
-use slack_morphism::{SlackApiToken, SlackBasicChannelInfo, SlackClient, SlackHistoryMessage};
+use slack_morphism::{
+    SlackApiToken, SlackBasicChannelInfo, SlackChannelId, SlackClient, SlackHistoryMessage, SlackTs,
+};
 
 use crate::slack::client::{build_bot_token, build_user_token};
 
@@ -46,9 +48,11 @@ pub async fn get_replies(
     let client = SlackClient::new(SlackClientHyperConnector::new());
     let slack_token: SlackApiToken = build_bot_token().await;
     let session = client.open_session(&slack_token);
+    let slack_channel: SlackChannelId = channel.into();
+    let slack_timestamp: SlackTs = timestamp.into();
 
     let conversations_replies_request =
-        SlackApiConversationsRepliesRequest::new(channel.into(), timestamp.into());
+        SlackApiConversationsRepliesRequest::new(slack_channel, slack_timestamp);
 
     let conversations_replies_response: SlackApiConversationsRepliesResponse = session
         .conversations_replies(&conversations_replies_request)

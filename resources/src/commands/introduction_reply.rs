@@ -14,13 +14,9 @@ pub async fn send(
         "forks",
     ];
     for emoji_name in emoji_names {
-        slack::reactions::add(
-            intros_channel_id.as_str(),
-            base_message_timestamp,
-            emoji_name,
-        )
-        .await
-        .unwrap_or_else(|err| log::info!("Add reaction error: {}", err));
+        slack::reactions::add(&intros_channel_id, base_message_timestamp, emoji_name)
+            .await
+            .unwrap_or_else(|err| log::info!("Add reaction error: {}", err));
     }
     let text: String = format!(
         "Hey welcome to CodeDevils I am DevilBot! :partywizard: \

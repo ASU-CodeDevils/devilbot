@@ -2,7 +2,7 @@ use slack_morphism::api::{SlackApiReactionsAddRequest, SlackApiReactionsAddRespo
 use slack_morphism::hyper_tokio::SlackClientHyperConnector;
 use slack_morphism::{SlackApiToken, SlackClient};
 
-use crate::slack::client::build_token;
+use crate::slack::client::build_bot_token;
 
 /**
  * Adds the specified reaction to a message identified by its timestamp.
@@ -14,7 +14,7 @@ pub async fn add(
     reaction: &str,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let client = SlackClient::new(SlackClientHyperConnector::new());
-    let slack_token: SlackApiToken = build_token().await;
+    let slack_token: SlackApiToken = build_bot_token().await;
     let session = client.open_session(&slack_token);
 
     let add_reaction_request =

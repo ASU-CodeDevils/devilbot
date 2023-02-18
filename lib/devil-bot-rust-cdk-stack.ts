@@ -31,6 +31,7 @@ export class DevilBotRustCdkStack extends Stack {
         // Fill in your personal app's token below when testing (remove them when creating a PR)
         RUST_BACKTRACE: '1',
         SLACK_API_BOT_TOKEN: '',
+        SLACK_API_USER_TOKEN: '',
         BUNS_TABLE_NAME: bunsTable.tableName,
         IS_DEVELOPMENT: 'true',
         TEST_CHANNEL_ID: 'C0351GJ62Q0',

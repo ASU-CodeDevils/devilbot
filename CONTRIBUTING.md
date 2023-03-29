@@ -1,5 +1,5 @@
 # Contributing Guidelines and Git Flow
-This document plans to outline the following for *all* contributers of the Rust DevilBot project. Please follow these guidelines to the best of your knowledge and understanding, and feel free to message `@jtmichel` or `@sjcampb2` in the CodeDevils Slack workspace if you have any questions or need help!
+This document plans to outline the following for *all* contributers of the Rust DevilBot project. Please follow these guidelines to the best of your knowledge and understanding, and feel free to message `@Json Michelson` or `@sjcampb2` in the CodeDevils Slack workspace if you have any questions or need help!
 
 ### Table of Contents
 1. [Chain of Command](#chain-of-command)

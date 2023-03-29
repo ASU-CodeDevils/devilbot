@@ -14,7 +14,7 @@ This document plans to outline the following for *all* contributers of the Rust 
 ---
 
 # Chain of Command
-The Rust DevilBot project managers are Jason Michelson ([@jtmichelson](https://github.com/jtmichelson)) and Stu Campbell ([@stucamp](https://github.com/stucamp)). They control the day-to-day opperation of this project, with oversight and policy ditacted by the CodeDevil Officers.
+The Rust DevilBot project managers are Jason Michelson ([@jtmichelson](https://github.com/jtmichelson)) and JRhett Harrison Campbell ([@reharri7](https://github.com/reharri7)). They control the day-to-day opperation of this project, with oversight and policy ditacted by the CodeDevil Officers.
 
 > To see your CodeDevil officers, visit the `#about` channel of the CodeDevils Slack workspace.
 
@@ -40,7 +40,7 @@ Observe the following in your git flow:
 #### Marlee's Quick Patch (Simple)
 > My name is Marlee, and I noticed a mispelling in the README.
 > 
-> I would create a GitHub issue for this, then create a branch called `marlee-hotfix`, make the correction, then submit a pull request to `main` making sure to request review from [@jtmichelson](https://github.com/jtmichelson) or [@stucamp](https://github.com/stucamp).
+> I would create a GitHub issue for this, then create a branch called `marlee-hotfix`, make the correction, then submit a pull request to `main` making sure to request review from [@jtmichelson](https://github.com/jtmichelson) or [@reharri7](https://github.com/reharri7).
 
 Good job Marlee!
 
@@ -49,7 +49,7 @@ Good job Marlee!
 > 
 > I would create a GitHub issue for the new feature, then checkout a new branch entitled `calendar-dev`, acting as the default branch for the calendar between Darryl and I, making sure to keep it updated with `main`. Darryl and I would then have our own branches whatever we want to call them following the guideline, say  `darryl-calendar` and `clyde-dev`. We push and pull from `calendar-dev` for development.
 > 
-> When our cool new command is done, *making sure to pull `calendar-dev` from `main` so that there are not merge conflicts*, I would then make a pull request on `main`. Billy-Bob is good with calendars, so I would like his review too. I would request review from `@BillyBobUSA` along with a project manager such as [@jtmichelson](https://github.com/jtmichelson) or [@stucamp](https://github.com/stucamp).
+> When our cool new command is done, *making sure to pull `calendar-dev` from `main` so that there are not merge conflicts*, I would then make a pull request on `main`. Billy-Bob is good with calendars, so I would like his review too. I would request review from `@BillyBobUSA` along with a project manager such as [@jtmichelson](https://github.com/jtmichelson) or [@reharri7](https://github.com/reharri7).
 
 Nicely done!
 

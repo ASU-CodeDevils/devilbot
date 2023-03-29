@@ -1,5 +1,5 @@
 # Contributing Guidelines and Git Flow
-This document plans to outline the following for *all* contributers of the Rust DevilBot project. Please follow these guidelines to the best of your knowledge and understanding, and feel free to message `@Json Michelson` or `@sjcampb2` in the CodeDevils Slack workspace if you have any questions or need help!
+This document plans to outline the following for *all* contributors of the Rust DevilBot project. Please follow these guidelines to the best of your knowledge and understanding, and feel free to message `@Json Michelson` or `@sjcampb2` in the CodeDevils Slack workspace if you have any questions or need help!
 
 ### Table of Contents
 1. [Chain of Command](#chain-of-command)
@@ -14,19 +14,18 @@ This document plans to outline the following for *all* contributers of the Rust 
 ---
 
 # Chain of Command
-The Rust DevilBot project managers are Jason Michelson ([@jtmichelson](https://github.com/jtmichelson)) and JRhett Harrison Campbell ([@reharri7](https://github.com/reharri7)). They control the day-to-day opperation of this project, with oversight and policy ditacted by the CodeDevil Officers.
-
+The Rust DevilBot project managers are Jason Michelson ([@jtmichelson](https://github.com/jtmichelson)) and JRhett Harrison Campbell ([@reharri7](https://github.com/reharri7)). They control the day-to-day operation of this project, with oversight and policy dictated by the CodeDevil Officers.
 > To see your CodeDevil officers, visit the `#about` channel of the CodeDevils Slack workspace.
 
 # Git Flow
-Overall, the Git flow is mostly laidback. You, as a contributer, have lots of wiggle room to make your own inputs in your commits to this repo. Forking is not neccesary - use the origin repo's branches for your own code bases. You have full control over your own development branches and Git flow. That said, there are some general guidelines you need to follow.
+Overall, the Git flow is mostly laid back. You, as a contributor, have lots of wiggle room to make your own inputs in your commits to this repo. Forking is not necessary - use the origin repo's branches for your own code bases. You have full control over your own development branches and Git flow. That said, there are some general guidelines you need to follow.
 
 ## Overview
 #### Personal Branch
 This is your own branch. You can call it whatever you want locally and push it into the remote repository. Your working commits will be on this branch and when you are ready to create a pull request (PR) for a specific GitHub issue you will use your personal branch for that PR.
 
 #### Main Branch
-The `main` branch is the *production code* that DevilBot is currently opperating on. Whatever is in `main` is what will be on Slack. PRs from personal branches to `main` will **require an approved code review from a project manager**.
+The `main` branch is the *production code* that DevilBot is currently operating on. Whatever is in `main` is what will be on Slack. PRs from personal branches to `main` will **require an approved code review from a project manager**.
 
 ## Contribution Requirements
 Observe the following in your git flow:
@@ -38,7 +37,7 @@ Observe the following in your git flow:
 
 ### Workflow Examples
 #### Marlee's Quick Patch (Simple)
-> My name is Marlee, and I noticed a mispelling in the README.
+> My name is Marlee, and I noticed a misspelling in the README.
 > 
 > I would create a GitHub issue for this, then create a branch called `marlee-hotfix`, make the correction, then submit a pull request to `main` making sure to request review from [@jtmichelson](https://github.com/jtmichelson) or [@reharri7](https://github.com/reharri7).
 

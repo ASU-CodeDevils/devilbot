@@ -77,7 +77,7 @@ pub fn build_bot_slack_block_message(first_name: &str) -> Vec<SlackBlock> {
     block_vector.push(paragraph2_block);
     block_vector.push(slack_divider_block.clone());
 
-    let markdown1: SlackBlockMarkDownText = "We have meetings every other Wednesday at 6:30 PM MST over Zoom. Links for these meetings get posted to the <#C30L07P18> channel along with other announcements.".into();
+    let markdown1: SlackBlockMarkDownText = "We have meetings every other Wednesday at 6:30 PM MST over Zoom during the Fall and Spring semesters. Links for these meetings get posted to the <#C30L07P18> channel along with other announcements.".into();
     let markdown1_block_text: SlackBlockText = markdown1.into();
     let markdown1_block: SlackBlock = SlackSectionBlock::new()
         .with_text(markdown1_block_text)
@@ -92,7 +92,8 @@ pub fn build_bot_slack_block_message(first_name: &str) -> Vec<SlackBlock> {
     block_vector.push(markdown2_block);
     block_vector.push(slack_divider_block);
 
-    let markdown3: SlackBlockMarkDownText = "Next, I would like you to go to the <#CMGU8033K> channel and introduce yourself. After that, come on over to <#C2N5P84BD>. Most of my creators are there all day.".into();
+    let markdown3: SlackBlockMarkDownText =
+        "Lastly, we have a discord server for you to join. Join here! https://discord.gg/xG4VnS2hfZ".into();
     let markdown3_block_text: SlackBlockText = markdown3.into();
     let markdown3_block: SlackBlock = SlackSectionBlock::new()
         .with_text(markdown3_block_text)
